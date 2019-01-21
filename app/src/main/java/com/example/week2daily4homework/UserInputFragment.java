@@ -57,7 +57,11 @@ public class UserInputFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if (mListener != null) {
-            mListener.sendToActivity(etName.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
+            String pass = etPassword.getText().toString();
+            User user = new User(name, email, pass);
+            mListener.sendToActivity(user);
         }
     }
 
@@ -89,7 +93,7 @@ public class UserInputFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void sendToActivity(String name, String email, String pass);
+        void sendToActivity(User user);
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements UserInputFragment.OnFragmentInteractionListener{
     UserInputFragment userInputFragment;
-    DisplayUserFragment displayUserFragment;
+    DisplayFragment displayFragment;
     ArrayList<User> list = new ArrayList<>();
 
     @Override
@@ -18,16 +18,15 @@ public class MainActivity extends AppCompatActivity implements UserInputFragment
         setContentView(R.layout.activity_main);
 
         userInputFragment = new UserInputFragment();
+        displayFragment = new DisplayFragment();
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.flFragOne, userInputFragment).commit();
-        fm.beginTransaction().replace(R.id.flFragTwo, displayUserFragment).commit();
+        fm.beginTransaction().replace(R.id.flFragTwo, displayFragment).commit();
     }
 
-
     @Override
-    public void sendToActivity(String name, String email, String pass) {
-        User user = new User(name, email, pass);
-        list.add(user);
+    public void sendToActivity(User user) {
+        DisplayFragment.setDisplay(user);
     }
 }
